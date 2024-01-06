@@ -1,3 +1,3 @@
 #!/usr/bin/python3
 import string
-print(''.join(list(string.ascii_uppercase)))
+print(''.join([*map(lambda x: chr(x), range(ord('A'), ord('Z') + 1))]))
