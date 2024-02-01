@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # 100-print_tebahpla.py
-# Brennan D Baraban <375@holbertonschool.com>
 
-"""Print the alphabet in reverse order alternating upper- and lower-case."""
-for c in range(ord('z'), ord('a') - 1, -1):
-    print(chr(c), end="" if (ord('z') - c) % 64 < 32 else "\n")
+for i in range(ord('z'), ord('A') - 1, -1):
+    print("{}".format(chr(i) if i % 2 == 0 else chr(i - 32)), end="")
+
