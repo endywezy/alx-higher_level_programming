@@ -41,6 +41,7 @@ def xout(board, row, col):
         row (int): The row where a queen was last played.
         col (int): The column where a queen was last played.
     """
+
     n = len(board)
     for c in range(col + 1, n):
         board[row][c] = "x"
@@ -79,6 +80,7 @@ def recursive_solve(board, row, queens, solutions):
     Returns:
         solutions
     """
+
     n = len(board)
 
     if queens == n:
