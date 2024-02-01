@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""defines alocked class."""
+"""defines blocked class."""
 class LockedClass:
     """
     Prevent the user from instantiating new LockedClass attributes
@@ -9,5 +9,3 @@ class LockedClass:
 
 
     __slots__ = ['first_name']
-    def __init__(self):
-        pass
