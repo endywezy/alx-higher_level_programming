@@ -1,9 +1,8 @@
-#!/usr/bin/python3
-"""Define Student to JSON with filter"""
+"""Defines a class Student."""
 
 
 class Student:
-    """define the class as student"""
+    """Represent a student."""
 
     def __init__(self, first_name, last_name, age):
         """Initialize a new Student.
@@ -26,7 +25,5 @@ class Student:
         Args:
             attrs (list): (Optional) The attributes to represent.
         """
-        if attrs is None:
-            return self.__dict__
-        else:
-            return {attr: getattr(self, attr) for attr in attrs if hasattr(self, attr)}
+        return {k: v for k, v in self.__dict__.items() if attrs is None or k in attrs}
+
