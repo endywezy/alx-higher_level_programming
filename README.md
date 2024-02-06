@@ -1,40 +1,48 @@
 Toggle navigation
-0x05. Python - Exceptions
+Curriculum
+SE Foundations
+Average: 113.92%
+0x0B. Python - Input/Output
 Python
  By: Guillaume
  Weight: 1
- Ongoing second chance project - started Jan 22, 2024 6:00 AM, must end by Jan 25, 2024 6:00 AM
+ Project will start Feb 6, 2024 6:00 AM, must end by Feb 7, 2024 6:00 AM
+ Checker will be released at Feb 6, 2024 12:00 PM
  An auto review will be launched at the deadline
-In a nutshell…
-Auto QA review: 0.0/84 mandatory & 0.0/51 optional
-Altogether:  0.0%
-Mandatory: 0.0%
-Optional: 0.0%
-Calculation:  0.0% + (0.0% * 0.0%)  == 0.0%
 Resources
 Read or watch:
 
-Errors and Exceptions
-Learn to Program 11 Static & Exception Handling (starting at minute 7)
+7.2. Reading and Writing Files
+8.7. Predefined Clean-up Actions
+Dive Into Python 3: Chapter 11. Files (until “11.4 Binary Files” (included))
+JSON encoder and decoder
+Learn to Program 8 : Reading / Writing Files
+Automate the Boring Stuff with Python (ch. 8 p 180-183 and ch. 14 p 326-333)
+All about py-file I/O
 Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
 General
 Why Python programming is awesome
-What’s the difference between errors and exceptions
-What are exceptions and how to use them
-When do we need to use exceptions
-How to correctly handle an exception
-What’s the purpose of catching exceptions
-How to raise a builtin exception
-When do we need to implement a clean-up action after an exception
+How to open a file
+How to write text in a file
+How to read the full content of a file
+How to read a file line by line
+How to move the cursor in a file
+How to make sure a file is closed after using it
+What is and how to use the with statement
+What is JSON
+What is serialization
+What is deserialization
+How to convert a Python data structure to a JSON string
+How to convert a JSON string to a Python data structure
 Copyright - Plagiarism
 You are tasked to come up with solutions for the tasks below yourself to meet with the above learning objectives.
 You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
 You are not allowed to publish any content of this project.
 Any form of plagiarism is strictly forbidden and will result in removal from the program.
 Requirements
-General
+Python Scripts
 Allowed editors: vi, vim, emacs
 All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
 All your files should end with a new line
@@ -43,669 +51,808 @@ A README.md file, at the root of the folder of the project, is mandatory
 Your code should use the pycodestyle (version 2.8.*)
 All your files must be executable
 The length of your files will be tested using wc
+Python Test Cases
+Allowed editors: vi, vim, emacs
+All your files should end with a new line
+All your test files should be inside a folder tests
+All your test files should be text files (extension: .txt)
+All your tests should be executed by using this command: python3 -m doctest ./tests/*
+All your modules should have a documentation (python3 -c 'print(__import__("my_module").__doc__)')
+All your classes should have a documentation (python3 -c 'print(__import__("my_module").MyClass.__doc__)')
+All your functions (inside and outside a class) should have a documentation (python3 -c 'print(__import__("my_module").my_function.__doc__)' and python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)')
+A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
+We strongly encourage you to work together on test cases, so that you don’t miss any edge case
 Tasks
-0. Safe list printing
+0. Read file
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that prints x elements of a list.
+Write a function that reads a text file (UTF8) and prints it to stdout:
 
-Prototype: def safe_print_list(my_list=[], x=0):
-my_list can contain any type (integer, string, etc.)
-All elements must be printed on the same line followed by a new line.
-x represents the number of elements to print
-x can be bigger than the length of my_list
-Returns the real number of elements printed
-You have to use try: / except:
+Prototype: def read_file(filename=""):
+You must use the with statement
+You don’t need to manage file permission or file doesn't exist exceptions.
 You are not allowed to import any module
-You are not allowed to use len()
-guillaume@ubuntu:~/0x05$ cat 0-main.py
+guillaume@ubuntu:~/0x0B$ cat 0-main.py
 #!/usr/bin/python3
-safe_print_list = __import__('0-safe_print_list').safe_print_list
+read_file = __import__('0-read_file').read_file
 
-my_list = [1, 2, 3, 4, 5]
+read_file("my_file_0.txt")
 
-nb_print = safe_print_list(my_list, 2)
-print("nb_print: {:d}".format(nb_print))
-nb_print = safe_print_list(my_list, len(my_list))
-print("nb_print: {:d}".format(nb_print))
-nb_print = safe_print_list(my_list, len(my_list) + 2)
-print("nb_print: {:d}".format(nb_print))
+guillaume@ubuntu:~/0x0B$ cat my_file_0.txt
+We offer a truly innovative approach to education:
+focus on building reliable applications and scalable systems, take on real-world challenges, collaborate with your peers. 
 
-guillaume@ubuntu:~/0x05$ ./0-main.py
-12
-nb_print: 2
-12345
-nb_print: 5
-12345
-nb_print: 5
-guillaume@ubuntu:~/0x05$ 
+A school every software engineer would have dreamt of!
+guillaume@ubuntu:~/0x0B$ ./0-main.py
+We offer a truly innovative approach to education:
+focus on building reliable applications and scalable systems, take on real-world challenges, collaborate with your peers. 
+
+A school every software engineer would have dreamt of!
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 0-safe_print_list.py
-    
-1. Safe printing of an integers list
+Directory: 0x0B-python-input_output
+File: 0-read_file.py
+  
+1. Write to a file
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that prints an integer with "{:d}".format().
+Write a function that writes a string to a text file (UTF8) and returns the number of characters written:
 
-Prototype: def safe_print_integer(value):
-value can be any type (integer, string, etc.)
-The integer should be printed followed by a new line
-Returns True if value has been correctly printed (it means the value is an integer)
-Otherwise, returns False
-You have to use try: / except:
-You have to use "{:d}".format() to print as integer
+Prototype: def write_file(filename="", text=""):
+You must use the with statement
+You don’t need to manage file permission exceptions.
+Your function should create the file if doesn’t exist.
+Your function should overwrite the content of the file if it already exists.
 You are not allowed to import any module
-You are not allowed to use type()
-guillaume@ubuntu:~/0x05$ cat 1-main.py
+guillaume@ubuntu:~/0x0B$ cat 1-main.py
 #!/usr/bin/python3
-safe_print_integer = __import__('1-safe_print_integer').safe_print_integer
+write_file = __import__('1-write_file').write_file
 
-value = 89
-has_been_print = safe_print_integer(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+nb_characters = write_file("my_first_file.txt", "This School is so cool!\n")
+print(nb_characters)
 
-value = -89
-has_been_print = safe_print_integer(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+guillaume@ubuntu:~/0x0B$ ./1-main.py
+29
+guillaume@ubuntu:~/0x0B$ cat my_first_file.txt
+This School is so cool!
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
 
-value = "School"
-has_been_print = safe_print_integer(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
-
-guillaume@ubuntu:~/0x05$ ./1-main.py
-89
--89
-School is not an integer
-guillaume@ubuntu:~/0x05$ 
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 1-safe_print_integer.py
-    
-2. Print and count integers
+Directory: 0x0B-python-input_output
+File: 1-write_file.py
+  
+2. Append to a file
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that prints the first x elements of a list and only integers.
+Write a function that appends a string at the end of a text file (UTF8) and returns the number of characters added:
 
-Prototype: def safe_print_list_integers(my_list=[], x=0):
-my_list can contain any type (integer, string, etc.)
-All integers have to be printed on the same line followed by a new line - other type of value in the list must be skipped (in silence).
-x represents the number of elements to access in my_list
-x can be bigger than the length of my_list - if it’s the case, an exception is expected to occur
-Returns the real number of integers printed
-You have to use try: / except:
-You have to use "{:d}".format() to print an integer
+Prototype: def append_write(filename="", text=""):
+If the file doesn’t exist, it should be created
+You must use the with statement
+You don’t need to manage file permission or file doesn't exist exceptions.
 You are not allowed to import any module
-You are not allowed to use len()
-guillaume@ubuntu:~/0x05$ cat 2-main.py
+guillaume@ubuntu:~/0x0B$ cat 2-main.py
 #!/usr/bin/python3
-safe_print_list_integers = \
-    __import__('2-safe_print_list_integers').safe_print_list_integers
+append_write = __import__('2-append_write').append_write
 
-my_list = [1, 2, 3, 4, 5]
+nb_characters_added = append_write("file_append.txt", "This School is so cool!\n")
+print(nb_characters_added)
 
-nb_print = safe_print_list_integers(my_list, 2)
-print("nb_print: {:d}".format(nb_print))
+guillaume@ubuntu:~/0x0B$ cat file_append.txt
+cat: file_append.txt: No such file or directory
+guillaume@ubuntu:~/0x0B$ ./2-main.py
+29
+guillaume@ubuntu:~/0x0B$ cat file_append.txt
+This School is so cool!
+guillaume@ubuntu:~/0x0B$ ./2-main.py
+29
+guillaume@ubuntu:~/0x0B$ cat file_append.txt
+This School is so cool!
+This School is so cool!
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
 
-my_list = [1, 2, 3, "School", 4, 5, [1, 2, 3]]
-nb_print = safe_print_list_integers(my_list, len(my_list))
-print("nb_print: {:d}".format(nb_print))
-
-nb_print = safe_print_list_integers(my_list, len(my_list) + 2)
-print("nb_print: {:d}".format(nb_print))
-
-guillaume@ubuntu:~/0x05$ ./2-main.py
-12
-nb_print: 2
-12345
-nb_print: 5
-12345Traceback (most recent call last):
-  File "./2-main.py", line 14, in <module>
-    nb_print = safe_print_list_integers(my_list, len(my_list) + 2)
-  File "/0x05/2-safe_print_list_integers.py", line 7, in safe_print_list_integers
-    print("{:d}".format(my_list[i]), end="")
-IndexError: list index out of range
-guillaume@ubuntu:~/0x05$ 
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 2-safe_print_list_integers.py
-    
-3. Integers division with debug
+Directory: 0x0B-python-input_output
+File: 2-append_write.py
+  
+3. To JSON string
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that divides 2 integers and prints the result.
+Write a function that returns the JSON representation of an object (string):
 
-Prototype: def safe_print_division(a, b):
-You can assume that a and b are integers
-The result of the division should print on the finally: section preceded by Inside result:
-Returns the value of the division, otherwise: None
-You have to use try: / except: / finally:
-You have to use "{}".format() to print the result
-You are not allowed to import any module
-guillaume@ubuntu:~/0x05$ cat 3-main.py
+Prototype: def to_json_string(my_obj):
+You don’t need to manage exceptions if the object can’t be serialized.
+guillaume@ubuntu:~/0x0B$ cat 3-main.py
 #!/usr/bin/python3
-safe_print_division = __import__('3-safe_print_division').safe_print_division
+to_json_string = __import__('3-to_json_string').to_json_string
 
-a = 12
-b = 2
-result = safe_print_division(a, b)
-print("{:d} / {:d} = {}".format(a, b, result))
+my_list = [1, 2, 3]
+s_my_list = to_json_string(my_list)
+print(s_my_list)
+print(type(s_my_list))
 
-a = 12
-b = 0
-result = safe_print_division(a, b)
-print("{:d} / {:d} = {}".format(a, b, result))
-
-guillaume@ubuntu:~/0x05$ ./3-main.py
-Inside result: 6.0
-12 / 2 = 6.0
-Inside result: None
-12 / 0 = None
-guillaume@ubuntu:~/0x05$ 
-Repo:
-
-GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 3-safe_print_division.py
-    
-4. Divide a list
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that divides element by element 2 lists.
-
-Prototype: def list_division(my_list_1, my_list_2, list_length):
-my_list_1 and my_list_2 can contain any type (integer, string, etc.)
-list_length can be bigger than the length of both lists
-Returns a new list (length = list_length) with all divisions
-If 2 elements can’t be divided, the division result should be equal to 0
-If an element is not an integer or float:
-print: wrong type
-If the division can’t be done (/0):
-print: division by 0
-If my_list_1 or my_list_2 is too short
-print: out of range
-You have to use try: / except: / finally:
-You are not allowed to import any module
-guillaume@ubuntu:~/0x05$ cat 4-main.py
-#!/usr/bin/python3
-list_division = __import__('4-list_division').list_division
-
-my_l_1 = [10, 8, 4]
-my_l_2 = [2, 4, 4]
-result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
-print(result)
-
-print("--")
-
-my_l_1 = [10, 8, 4, 4]
-my_l_2 = [2, 0, "H", 2, 7]
-result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
-print(result)
-
-guillaume@ubuntu:~/0x05$ ./4-main.py
-[5.0, 2.0, 1.0]
---
-division by 0
-wrong type
-out of range
-[5.0, 0, 0, 2.0, 0]
-guillaume@ubuntu:~/0x05$ 
-Repo:
-
-GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 4-list_division.py
-    
-5. Raise exception
-mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that raises a type exception.
-
-Prototype: def raise_exception():
-You are not allowed to import any module
-guillaume@ubuntu:~/0x05$ cat 5-main.py
-#!/usr/bin/python3
-raise_exception = __import__('5-raise_exception').raise_exception
+my_dict = { 
+    'id': 12,
+    'name': "John",
+    'places': [ "San Francisco", "Tokyo" ],
+    'is_active': True,
+    'info': {
+        'age': 36,
+        'average': 3.14
+    }
+}
+s_my_dict = to_json_string(my_dict)
+print(s_my_dict)
+print(type(s_my_dict))
 
 try:
-    raise_exception()
-except TypeError as te:
-    print("Exception raised")
+    my_set = { 132, 3 }
+    s_my_set = to_json_string(my_set)
+    print(s_my_set)
+    print(type(s_my_set))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
 
-guillaume@ubuntu:~/0x05$ ./5-main.py
-Exception raised
-guillaume@ubuntu:~/0x05$ 
+guillaume@ubuntu:~/0x0B$ ./3-main.py
+[1, 2, 3]
+<class 'str'>
+{"id": 12, "is_active": true, "name": "John", "info": {"average": 3.14, "age": 36}, "places": ["San Francisco", "Tokyo"]}
+<class 'str'>
+[TypeError] {3, 132} is not JSON serializable
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 5-raise_exception.py
-    
-6. Raise a message
+Directory: 0x0B-python-input_output
+File: 3-to_json_string.py
+  
+4. From JSON string to Object
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that raises a name exception with a message.
+Write a function that returns an object (Python data structure) represented by a JSON string:
 
-Prototype: def raise_exception_msg(message=""):
-You are not allowed to import any module
-guillaume@ubuntu:~/0x05$ cat 6-main.py
+Prototype: def from_json_string(my_str):
+You don’t need to manage exceptions if the JSON string doesn’t represent an object.
+guillaume@ubuntu:~/0x0B$ cat 4-main.py
 #!/usr/bin/python3
-raise_exception_msg = __import__('6-raise_exception_msg').raise_exception_msg
+from_json_string = __import__('4-from_json_string').from_json_string
+
+s_my_list = "[1, 2, 3]"
+my_list = from_json_string(s_my_list)
+print(my_list)
+print(type(my_list))
+
+s_my_dict = """
+{"is_active": true, "info": {"age": 36, "average": 3.14}, 
+"id": 12, "name": "John", "places": ["San Francisco", "Tokyo"]}
+"""
+my_dict = from_json_string(s_my_dict)
+print(my_dict)
+print(type(my_dict))
 
 try:
-    raise_exception_msg("C is fun")
-except NameError as ne:
-    print(ne)
+    s_my_dict = """
+    {"is_active": true, 12 }
+    """
+    my_dict = from_json_string(s_my_dict)
+    print(my_dict)
+    print(type(my_dict))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
 
-guillaume@ubuntu:~/0x05$ ./6-main.py
-C is fun
-guillaume@ubuntu:~/0x05$ 
+guillaume@ubuntu:~/0x0B$ ./4-main.py
+[1, 2, 3]
+<class 'list'>
+{'id': 12, 'is_active': True, 'name': 'John', 'info': {'age': 36, 'average': 3.14}, 'places': ['San Francisco', 'Tokyo']}
+<class 'dict'>
+[ValueError] Expecting property name enclosed in double quotes: line 2 column 25 (char 25)
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 6-raise_exception_msg.py
-    
-7. Safe integer print with error message
-#advanced
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that prints an integer.
+Directory: 0x0B-python-input_output
+File: 4-from_json_string.py
+  
+5. Save Object to a file
+mandatory
+Write a function that writes an Object to a text file, using a JSON representation:
 
-Prototype: def safe_print_integer_err(value):
-value can be any type (integer, string, etc.)
-The integer should be printed followed by a new line
-Returns True if value has been correctly printed (it means the value is an integer)
-Otherwise, returns False and prints in stderr the error precede by Exception:
-You have to use try: / except:
-You have to use "{:d}".format() to print as integer
-You are not allowed to use type()
-guillaume@ubuntu:~/0x05$ cat 100-main.py
+Prototype: def save_to_json_file(my_obj, filename):
+You must use the with statement
+You don’t need to manage exceptions if the object can’t be serialized.
+You don’t need to manage file permission exceptions.
+guillaume@ubuntu:~/0x0B$ cat 5-main.py
 #!/usr/bin/python3
-safe_print_integer_err = \
-    __import__('100-safe_print_integer_err').safe_print_integer_err
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
 
-value = 89
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+filename = "my_list.json"
+my_list = [1, 2, 3]
+save_to_json_file(my_list, filename)
 
-value = -89
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+filename = "my_dict.json"
+my_dict = { 
+    'id': 12,
+    'name': "John",
+    'places': [ "San Francisco", "Tokyo" ],
+    'is_active': True,
+    'info': {
+        'age': 36,
+        'average': 3.14
+    }
+}
+save_to_json_file(my_dict, filename)
 
-value = "School"
-has_been_print = safe_print_integer_err(value)
-if not has_been_print:
-    print("{} is not an integer".format(value))
+try:
+    filename = "my_set.json"
+    my_set = { 132, 3 }
+    save_to_json_file(my_set, filename)
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
 
-guillaume@ubuntu:~/0x05$ ./100-main.py
-89
--89
-Exception: Unknown format code 'd' for object of type 'str'
-School is not an integer
-guillaume@ubuntu:~/0x05$ ./100-main.py 2> /dev/null
-89
--89
-School is not an integer
-guillaume@ubuntu:~/0x05$ 
+guillaume@ubuntu:~/0x0B$ ./5-main.py
+[TypeError] {3, 132} is not JSON serializable
+guillaume@ubuntu:~/0x0B$ cat my_list.json ; echo ""
+[1, 2, 3]
+guillaume@ubuntu:~/0x0B$ cat my_dict.json ; echo ""
+{"name": "John", "places": ["San Francisco", "Tokyo"], "id": 12, "info": {"average": 3.14, "age": 36}, "is_active": true}
+guillaume@ubuntu:~/0x0B$ cat my_set.json ; echo ""
+
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 100-safe_print_integer_err.py
-    
-8. Safe function
-#advanced
-Score: 0.0% (Checks completed: 0.0%)
-Write a function that executes a function safely.
+Directory: 0x0B-python-input_output
+File: 5-save_to_json_file.py
+  
+6. Create object from a JSON file
+mandatory
+Write a function that creates an Object from a “JSON file”:
 
-Prototype: def safe_function(fct, *args):
-You can assume fct will be always a pointer to a function
-Returns the result of the function,
-Otherwise, returns None if something happens during the function and prints in stderr the error precede by Exception:
-You have to use try: / except:
-guillaume@ubuntu:~/0x05$ cat 101-main.py
+Prototype: def load_from_json_file(filename):
+You must use the with statement
+You don’t need to manage exceptions if the JSON string doesn’t represent an object.
+You don’t need to manage file permissions / exceptions.
+guillaume@ubuntu:~/0x0B$ cat my_fake.json
+{"is_active": true, 12 }
+guillaume@ubuntu:~/0x0B$ cat 6-main.py
 #!/usr/bin/python3
-safe_function = __import__('101-safe_function').safe_function
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
+filename = "my_list.json"
+my_list = load_from_json_file(filename)
+print(my_list)
+print(type(my_list))
 
-def my_div(a, b):
-    return a / b
+filename = "my_dict.json"
+my_dict = load_from_json_file(filename)
+print(my_dict)
+print(type(my_dict))
 
-result = safe_function(my_div, 10, 2)
-print("result of my_div: {}".format(result))
+try:
+    filename = "my_set_doesnt_exist.json"
+    my_set = load_from_json_file(filename)
+    print(my_set)
+    print(type(my_set))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
 
-result = safe_function(my_div, 10, 0)
-print("result of my_div: {}".format(result))
+try:
+    filename = "my_fake.json"
+    my_fake = load_from_json_file(filename)
+    print(my_fake)
+    print(type(my_fake))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
 
+guillaume@ubuntu:~/0x0B$ cat my_list.json ; echo ""
+[1, 2, 3]
+guillaume@ubuntu:~/0x0B$ cat my_dict.json ; echo ""
+{"name": "John", "places": ["San Francisco", "Tokyo"], "id": 12, "info": {"average": 3.14, "age": 36}, "is_active": true}
+guillaume@ubuntu:~/0x0B$ cat my_fake.json ; echo ""
+{"is_active": true, 12 }
+guillaume@ubuntu:~/0x0B$ ./6-main.py
+[1, 2, 3]
+<class 'list'>
+{'name': 'John', 'info': {'age': 36, 'average': 3.14}, 'id': 12, 'places': ['San Francisco', 'Tokyo'], 'is_active': True}
+<class 'dict'>
+[FileNotFoundError] [Errno 2] No such file or directory: 'my_set_doesnt_exist.json'
+[ValueError] Expecting property name enclosed in double quotes: line 1 column 21 (char 20)
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
 
-def print_list(my_list, len):
-    i = 0
-    while i < len:
-        print(my_list[i])
-        i += 1
-    return len
-
-result = safe_function(print_list, [1, 2, 3, 4], 10)
-print("result of print_list: {}".format(result))
-
-guillaume@ubuntu:~/0x05$ ./101-main.py
-result of my_div: 5.0
-Exception: division by zero
-result of my_div: None
-1
-2
-3
-4
-Exception: list index out of range
-result of print_list: None
-guillaume@ubuntu:~/0x05$ ./101-main.py 2> /dev/null
-result of my_div: 5.0
-result of my_div: None
-1
-2
-3
-4
-result of print_list: None
-guillaume@ubuntu:~/0x05$ 
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 101-safe_function.py
-    
-9. ByteCode -> Python #4
+Directory: 0x0B-python-input_output
+File: 6-load_from_json_file.py
+  
+7. Load, add, save
+mandatory
+Write a script that adds all arguments to a Python list, and then save them to a file:
+
+You must use your function save_to_json_file from 5-save_to_json_file.py
+You must use your function load_from_json_file from 6-load_from_json_file.py
+The list must be saved as a JSON representation in a file named add_item.json
+If the file doesn’t exist, it should be created
+You don’t need to manage file permissions / exceptions.
+guillaume@ubuntu:~/0x0B$ cat add_item.json
+cat: add_item.json: No such file or directory
+guillaume@ubuntu:~/0x0B$ ./7-add_item.py
+guillaume@ubuntu:~/0x0B$ cat add_item.json ; echo ""
+[]
+guillaume@ubuntu:~/0x0B$ ./7-add_item.py Best School
+guillaume@ubuntu:~/0x0B$ cat add_item.json ; echo ""
+["Best", "School"]
+guillaume@ubuntu:~/0x0B$ ./7-add_item.py 89 Python C
+guillaume@ubuntu:~/0x0B$ cat add_item.json ; echo ""
+["Best", "School", "89", "Python", "C"]
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 7-add_item.py
+  
+8. Class to JSON
+mandatory
+Write a function that returns the dictionary description with simple data structure (list, dictionary, string, integer and boolean) for JSON serialization of an object:
+
+Prototype: def class_to_json(obj):
+obj is an instance of a Class
+All attributes of the obj Class are serializable: list, dictionary, string, integer and boolean
+You are not allowed to import any module
+guillaume@ubuntu:~/0x0B$ cat 8-my_class.py 
+#!/usr/bin/python3
+""" My class module
+"""
+
+class MyClass:
+    """ My class
+    """
+
+    def __init__(self, name):
+        self.name = name
+        self.number = 0
+
+    def __str__(self):
+        return "[MyClass] {} - {:d}".format(self.name, self.number)
+
+guillaume@ubuntu:~/0x0B$ cat 8-main.py 
+#!/usr/bin/python3
+MyClass = __import__('8-my_class').MyClass
+class_to_json = __import__('8-class_to_json').class_to_json
+
+m = MyClass("John")
+m.number = 89
+print(type(m))
+print(m)
+
+mj = class_to_json(m)
+print(type(mj))
+print(mj)
+
+guillaume@ubuntu:~/0x0B$ ./8-main.py 
+<class '8-my_class.MyClass'>
+[MyClass] John - 89
+<class 'dict'>
+{'name': 'John', 'number': 89}
+guillaume@ubuntu:~/0x0B$ 
+guillaume@ubuntu:~/0x0B$ cat 8-my_class_2.py 
+#!/usr/bin/python3
+""" My class module
+"""
+
+class MyClass:
+    """ My class
+    """
+
+    score = 0
+
+    def __init__(self, name, number = 4):
+        self.__name = name
+        self.number = number
+        self.is_team_red = (self.number % 2) == 0
+
+    def win(self):
+        self.score += 1
+
+    def lose(self):
+        self.score -= 1
+
+    def __str__(self):
+        return "[MyClass] {} - {:d} => {:d}".format(self.__name, self.number, self.score)
+
+guillaume@ubuntu:~/0x0B$ cat 8-main_2.py 
+#!/usr/bin/python3
+MyClass = __import__('8-my_class_2').MyClass
+class_to_json = __import__('8-class_to_json').class_to_json
+
+m = MyClass("John")
+m.win()
+print(type(m))
+print(m)
+
+mj = class_to_json(m)
+print(type(mj))
+print(mj)
+
+guillaume@ubuntu:~/0x0B$ ./8-main_2.py 
+<class '8-my_class_2.MyClass'>
+[MyClass] John - 4 => 1
+<class 'dict'>
+{'number': 4, '_MyClass__name': 'John', 'is_team_red': True, 'score': 1}
+guillaume@ubuntu:~/0x0B$
+No test cases needed
+
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 8-class_to_json.py
+  
+9. Student to JSON
+mandatory
+Write a class Student that defines a student by:
+
+Public instance attributes:
+first_name
+last_name
+age
+Instantiation with first_name, last_name and age: def __init__(self, first_name, last_name, age):
+Public method def to_json(self): that retrieves a dictionary representation of a Student instance (same as 8-class_to_json.py)
+You are not allowed to import any module
+guillaume@ubuntu:~/0x0B$ cat 9-main.py 
+#!/usr/bin/python3
+Student = __import__('9-student').Student
+
+students = [Student("John", "Doe", 23), Student("Bob", "Dylan", 27)]
+
+for student in students:
+    j_student = student.to_json()
+    print(type(j_student))
+    print(j_student['first_name'])
+    print(type(j_student['first_name']))
+    print(j_student['age'])
+    print(type(j_student['age']))
+
+guillaume@ubuntu:~/0x0B$ ./9-main.py 
+<class 'dict'>
+John
+<class 'str'>
+23
+<class 'int'>
+<class 'dict'>
+Bob
+<class 'str'>
+27
+<class 'int'>
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 9-student.py
+  
+10. Student to JSON with filter
+mandatory
+Write a class Student that defines a student by: (based on 9-student.py)
+
+Public instance attributes:
+first_name
+last_name
+age
+Instantiation with first_name, last_name and age: def __init__(self, first_name, last_name, age):
+Public method def to_json(self, attrs=None): that retrieves a dictionary representation of a Student instance (same as 8-class_to_json.py):
+If attrs is a list of strings, only attribute names contained in this list must be retrieved.
+Otherwise, all attributes must be retrieved
+You are not allowed to import any module
+guillaume@ubuntu:~/0x0B$ cat 10-main.py 
+#!/usr/bin/python3
+Student = __import__('10-student').Student
+
+student_1 = Student("John", "Doe", 23)
+student_2 = Student("Bob", "Dylan", 27)
+
+j_student_1 = student_1.to_json()
+j_student_2 = student_2.to_json(['first_name', 'age'])
+j_student_3 = student_2.to_json(['middle_name', 'age'])
+
+print(j_student_1)
+print(j_student_2)
+print(j_student_3)
+
+guillaume@ubuntu:~/0x0B$ ./10-main.py 
+{'age': 23, 'last_name': 'Doe', 'first_name': 'John'}
+{'age': 27, 'first_name': 'Bob'}
+{'age': 27}
+guillaume@ubuntu:~/0x0B$
+No test cases needed
+
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 10-student.py
+  
+11. Student to disk and reload
+mandatory
+Write a class Student that defines a student by: (based on 10-student.py)
+
+Public instance attributes:
+first_name
+last_name
+age
+Instantiation with first_name, last_name and age: def __init__(self, first_name, last_name, age):
+Public method def to_json(self, attrs=None): that retrieves a dictionary representation of a Student instance (same as 8-class_to_json.py):
+If attrs is a list of strings, only attributes name contain in this list must be retrieved.
+Otherwise, all attributes must be retrieved
+Public method def reload_from_json(self, json): that replaces all attributes of the Student instance:
+You can assume json will always be a dictionary
+A dictionary key will be the public attribute name
+A dictionary value will be the value of the public attribute
+You are not allowed to import any module
+Now, you have a simple implementation of a serialization and deserialization mechanism (concept of representation of an object to another format, without losing any information and allow us to rebuild an object based on this representation)
+
+guillaume@ubuntu:~/0x0B$ cat 11-main.py 
+#!/usr/bin/python3
+import os
+import sys
+
+Student = __import__('11-student').Student
+read_file = __import__('0-read_file').read_file
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+
+path = sys.argv[1]
+
+if os.path.exists(path):
+    os.remove(path)
+
+student_1 = Student("John", "Doe", 23)
+j_student_1 = student_1.to_json()
+print("Initial student:")
+print(student_1)
+print(type(student_1))
+print(type(j_student_1))
+print("{} {} {}".format(student_1.first_name, student_1.last_name, student_1.age))
+
+
+save_to_json_file(j_student_1, path)
+read_file(path)
+print("\nSaved to disk")
+
+
+print("Fake student:")
+new_student_1 = Student("Fake", "Fake", 89)
+print(new_student_1)
+print(type(new_student_1))
+print("{} {} {}".format(new_student_1.first_name, new_student_1.last_name, new_student_1.age))
+
+
+print("Load dictionary from file:")
+new_j_student_1 = load_from_json_file(path)
+
+new_student_1.reload_from_json(j_student_1)
+print(new_student_1)
+print(type(new_student_1))
+print("{} {} {}".format(new_student_1.first_name, new_student_1.last_name, new_student_1.age))
+
+guillaume@ubuntu:~/0x0B$ ./11-main.py student.json
+Initial student:
+<11-student.Student object at 0x7f832826eda0>
+<class '11-student.Student'>
+<class 'dict'>
+John Doe 23
+{"last_name": "Doe", "first_name": "John", "age": 23}
+Saved to disk
+Fake student:
+<11-student.Student object at 0x7f832826edd8>
+<class '11-student.Student'>
+Fake Fake 89
+Load dictionary from file:
+<11-student.Student object at 0x7f832826edd8>
+<class '11-student.Student'>
+John Doe 23
+guillaume@ubuntu:~/0x0B$ cat student.json ; echo ""
+{"last_name": "Doe", "first_name": "John", "age": 23}
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
+
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 11-student.py
+  
+12. Pascal's Triangle
+mandatory
+Technical interview preparation:
+
+You are not allowed to google anything
+Whiteboard first
+Create a function def pascal_triangle(n): that returns a list of lists of integers representing the Pascal’s triangle of n:
+
+Returns an empty list if n <= 0
+You can assume n will be always an integer
+You are not allowed to import any module
+guillaume@ubuntu:~/0x0B$ cat 12-main.py
+#!/usr/bin/python3
+"""
+12-main
+"""
+pascal_triangle = __import__('12-pascal_triangle').pascal_triangle
+
+def print_triangle(triangle):
+    """
+    Print the triangle
+    """
+    for row in triangle:
+        print("[{}]".format(",".join([str(x) for x in row])))
+
+
+if __name__ == "__main__":
+    print_triangle(pascal_triangle(5))
+
+guillaume@ubuntu:~/0x0B$ 
+guillaume@ubuntu:~/0x0B$ ./12-main.py
+[1]
+[1,1]
+[1,2,1]
+[1,3,3,1]
+[1,4,6,4,1]
+guillaume@ubuntu:~/0x0B$ 
+Repo:
+
+GitHub repository: alx-higher_level_programming
+Directory: 0x0B-python-input_output
+File: 12-pascal_triangle.py
+  
+13. Search and update
 #advanced
-Score: 0.0% (Checks completed: 0.0%)
-Write the Python function def magic_calculation(a, b): that does exactly the same as the following Python bytecode:
+Write a function that inserts a line of text to a file, after each line containing a specific string (see example):
 
-  3           0 LOAD_CONST               1 (0)
-              3 STORE_FAST               2 (result)
+Prototype: def append_after(filename="", search_string="", new_string=""):
+You must use the with statement
+You don’t need to manage file permission or file doesn't exist exceptions.
+You are not allowed to import any module
+guillaume@ubuntu:~/0x0B$ cat 100-main.py
+#!/usr/bin/python3
+append_after = __import__('100-append_after').append_after
 
-  4           6 SETUP_LOOP              94 (to 103)
-              9 LOAD_GLOBAL              0 (range)
-             12 LOAD_CONST               2 (1)
-             15 LOAD_CONST               3 (3)
-             18 CALL_FUNCTION            2 (2 positional, 0 keyword pair)
-             21 GET_ITER
-        >>   22 FOR_ITER                77 (to 102)
-             25 STORE_FAST               3 (i)
+append_after("append_after_100.txt", "Python", "\"C is fun!\"\n")
 
-  5          28 SETUP_EXCEPT            49 (to 80)
+guillaume@ubuntu:~/0x0B$ cat append_after_100.txt
+At Holberton School,
+Python is really important,
+But it can be very hard if:
+- You don't get all Pythonic tricks
+- You don't have strong C knowledge.
+guillaume@ubuntu:~/0x0B$ ./100-main.py
+guillaume@ubuntu:~/0x0B$ cat append_after_100.txt
+At School,
+Python is really important,
+"C is fun!"
+But it can be very hard if:
+- You don't get all Pythonic tricks
+"C is fun!"
+- You don't have strong C knowledge.
+guillaume@ubuntu:~/0x0B$ ./100-main.py
+guillaume@ubuntu:~/0x0B$ cat append_after_100.txt
+At School,
+Python is really important,
+"C is fun!"
+"C is fun!"
+But it can be very hard if:
+- You don't get all Pythonic tricks
+"C is fun!"
+"C is fun!"
+- You don't have strong C knowledge.
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
 
-  6          31 LOAD_FAST                3 (i)
-             34 LOAD_FAST                0 (a)
-             37 COMPARE_OP               4 (>)
-             40 POP_JUMP_IF_FALSE       58
-
-  7          43 LOAD_GLOBAL              1 (Exception)
-             46 LOAD_CONST               4 ('Too far')
-             49 CALL_FUNCTION            1 (1 positional, 0 keyword pair)
-             52 RAISE_VARARGS            1
-             55 JUMP_FORWARD            18 (to 76)
-
-  9     >>   58 LOAD_FAST                2 (result)
-             61 LOAD_FAST                0 (a)
-             64 LOAD_FAST                1 (b)
-             67 BINARY_POWER
-             68 LOAD_FAST                3 (i)
-             71 BINARY_TRUE_DIVIDE
-             72 INPLACE_ADD
-             73 STORE_FAST               2 (result)
-        >>   76 POP_BLOCK
-             77 JUMP_ABSOLUTE           22
-
- 10     >>   80 POP_TOP
-             81 POP_TOP
-             82 POP_TOP
-
- 11          83 LOAD_FAST                1 (b)
-             86 LOAD_FAST                0 (a)
-             89 BINARY_ADD
-             90 STORE_FAST               2 (result)
-
- 12          93 BREAK_LOOP
-             94 POP_EXCEPT
-             95 JUMP_ABSOLUTE           22
-             98 END_FINALLY
-             99 JUMP_ABSOLUTE           22
-        >>  102 POP_BLOCK
-
- 13     >>  103 LOAD_FAST                2 (result)
-            106 RETURN_VALUE
-Tip: Python bytecode
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 102-magic_calculation.py
-    
-10. CPython #2: PyFloatObject
+Directory: 0x0B-python-input_output
+File: 100-append_after.py
+  
+14. Log parsing
 #advanced
-Score: 0.0% (Checks completed: 0.0%)
-Create three C functions that print some basic info about Python lists, Python bytes an Python float objects.
+Write a script that reads stdin line by line and computes metrics:
 
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
+Each 10 lines and after a keyboard interruption (CTRL + C), prints those statistics since the beginning:
+Total file size: File size: <total size>
+where is the sum of all previous (see input format above)
+Number of lines by status code:
+possible status code: 200, 301, 400, 401, 403, 404, 405 and 500
+if a status code doesn’t appear, don’t print anything for this status code
+format: <status code>: <number>
+status codes should be printed in ascending order
+guillaume@ubuntu:~/0x0B$ cat 101-generator.py
+#!/usr/bin/python3
+import random
+import sys
+from time import sleep
+import datetime
 
-Python lists:
+for i in range(10000):
+    sleep(random.random())
+    sys.stdout.write("{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n".format(
+        random.randint(1, 255), random.randint(1, 255), random.randint(1, 255), random.randint(1, 255),
+        datetime.datetime.now(),
+        random.choice([200, 301, 400, 401, 403, 404, 405, 500]),
+        random.randint(1, 1024)
+    ))
+    sys.stdout.flush()
 
-Prototype: void print_python_list(PyObject *p);
-Format: see example
-If p is not a valid PyListObject, print an error message (see example)
-Python bytes:
+guillaume@ubuntu:~/0x0B$ ./101-generator.py | ./101-stats.py 
+File size: 5213
+200: 2
+401: 1
+403: 2
+404: 1
+405: 1
+500: 3
+File size: 11320
+200: 3
+301: 2
+400: 1
+401: 2
+403: 3
+404: 4
+405: 2
+500: 3
+File size: 16305
+200: 3
+301: 3
+400: 4
+401: 2
+403: 5
+404: 5
+405: 4
+500: 4
+^CFile size: 17146
+200: 4
+301: 3
+400: 4
+401: 2
+403: 6
+404: 6
+405: 4
+500: 4
+Traceback (most recent call last):
+  File "./101-stats.py", line 15, in <module>
+Traceback (most recent call last):
+  File "./101-generator.py", line 8, in <module>
+    for line in sys.stdin:
+KeyboardInterrupt
+    sleep(random.random())
+KeyboardInterrupt
+guillaume@ubuntu:~/0x0B$ 
+No test cases needed
 
-Prototype: void print_python_bytes(PyObject *p);
-Format: see example
-Line “first X bytes”: print a maximum of 10 bytes
-If p is not a valid PyBytesObject, print an error message (see example)
-Python float:
-
-Prototype: void print_python_float(PyObject *p);
-Format: see example
-If p is not a valid PyFloatObject, print an error message (see example)
-Read /usr/include/python3.4/floatobject.h
-About:
-
-Python version: 3.4
-You are allowed to use the C standard library
-Your shared library will be compiled with this command line: gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared -Wl,-soname,libPython.so -o libPython.so -fPIC -I/usr/include/python3.4 103-python.c
-You are not allowed to use the following macros/functions:
-Py_SIZE
-Py_TYPE
-PyList_Size
-PyList_GetItem
-PyBytes_AS_STRING
-PyBytes_GET_SIZE
-PyBytes_AsString
-PyBytes_AsStringAndSize
-PyFloat_AS_DOUBLE
-PySequence_GetItem
-PySequence_Fast_GET_SIZE
-PySequence_Fast_GET_ITEM
-PySequence_ITEM
-PySequence_Fast_ITEMS
-NOTE:
-
-The python script will be launched using the -u option (Force stdout to be unbuffered).
-It is strongly advised to either use setbuf(stdout, NULL); or fflush(stdout) in your C functions IF you choose to use printf. The reason to that is that Pythonsprintand libCs printf don’t share the same buffer, and the output can appear disordered.
-julien@ubuntu:~/CPython$ python3 --version
-Python 3.4.3
-julien@ubuntu:~/CPython$ gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared -Wl,-soname,libPython.so -o libPython.so -fPIC -I/usr/include/python3.4 103-python.c
-julien@ubuntu:~/CPython$ cat 103-tests.py 
-#!/usr/bin/python3 -u
-
-import ctypes
-
-lib = ctypes.CDLL('./libPython.so')
-lib.print_python_list.argtypes = [ctypes.py_object]
-lib.print_python_bytes.argtypes = [ctypes.py_object]
-lib.print_python_float.argtypes = [ctypes.py_object]
-s = b"Hello"
-lib.print_python_bytes(s);
-b = b'\xff\xf8\x00\x00\x00\x00\x00\x00';
-lib.print_python_bytes(b);
-b = b'What does the \'b\' character do in front of a string literal?';
-lib.print_python_bytes(b);
-l = [b'Hello', b'World']
-lib.print_python_list(l)
-del l[1]
-lib.print_python_list(l)
-l = l + [4, 5, 6.0, (9, 8), [9, 8, 1024], b"School", "Betty"]
-lib.print_python_list(l)
-l = []
-lib.print_python_list(l)
-l.append(0)
-lib.print_python_list(l)
-l.append(1)
-l.append(2)
-l.append(3)
-l.append(4)
-lib.print_python_list(l)
-l.pop()
-lib.print_python_list(l)
-l = ["School"]
-lib.print_python_list(l)
-lib.print_python_bytes(l);
-f = 3.14
-lib.print_python_float(f);
-l = [-1.0, -0.1, 0.0, 1.0, 3.14, 3.14159, 3.14159265, 3.141592653589793238462643383279502884197169399375105820974944592307816406286]
-print(l)
-lib.print_python_list(l);
-lib.print_python_float(l);
-lib.print_python_list(f);
-julien@ubuntu:~/CPython$ ./103-tests.py 
-[.] bytes object info
-  size: 5
-  trying string: Hello
-  first 6 bytes: 48 65 6c 6c 6f 00
-[.] bytes object info
-  size: 8
-  trying string: ??
-  first 9 bytes: ff f8 00 00 00 00 00 00 00
-[.] bytes object info
-  size: 60
-  trying string: What does the 'b' character do in front of a string literal?
-  first 10 bytes: 57 68 61 74 20 64 6f 65 73 20
-[*] Python list info
-[*] Size of the Python List = 2
-[*] Allocated = 2
-Element 0: bytes
-[.] bytes object info
-  size: 5
-  trying string: Hello
-  first 6 bytes: 48 65 6c 6c 6f 00
-Element 1: bytes
-[.] bytes object info
-  size: 5
-  trying string: World
-  first 6 bytes: 57 6f 72 6c 64 00
-[*] Python list info
-[*] Size of the Python List = 1
-[*] Allocated = 2
-Element 0: bytes
-[.] bytes object info
-  size: 5
-  trying string: Hello
-  first 6 bytes: 48 65 6c 6c 6f 00
-[*] Python list info
-[*] Size of the Python List = 8
-[*] Allocated = 8
-Element 0: bytes
-[.] bytes object info
-  size: 5
-  trying string: Hello
-  first 6 bytes: 48 65 6c 6c 6f 00
-Element 1: int
-Element 2: int
-Element 3: float
-[.] float object info
-  value: 6.0
-Element 4: tuple
-Element 5: list
-Element 6: bytes
-[.] bytes object info
-  size: 9
-  trying string: School
-  first 10 bytes: 48 6f 6c 62 65 72 74 6f 6e 00
-Element 7: str
-[*] Python list info
-[*] Size of the Python List = 0
-[*] Allocated = 0
-[*] Python list info
-[*] Size of the Python List = 1
-[*] Allocated = 4
-Element 0: int
-[*] Python list info
-[*] Size of the Python List = 5
-[*] Allocated = 8
-Element 0: int
-Element 1: int
-Element 2: int
-Element 3: int
-Element 4: int
-[*] Python list info
-[*] Size of the Python List = 4
-[*] Allocated = 8
-Element 0: int
-Element 1: int
-Element 2: int
-Element 3: int
-[*] Python list info
-[*] Size of the Python List = 1
-[*] Allocated = 1
-Element 0: str
-[.] bytes object info
-  [ERROR] Invalid Bytes Object
-[.] float object info
-  value: 3.14
-[-1.0, -0.1, 0.0, 1.0, 3.14, 3.14159, 3.14159265, 3.141592653589793]
-[*] Python list info
-[*] Size of the Python List = 8
-[*] Allocated = 8
-Element 0: float
-[.] float object info
-  value: -1.0
-Element 1: float
-[.] float object info
-  value: -0.1
-Element 2: float
-[.] float object info
-  value: 0.0
-Element 3: float
-[.] float object info
-  value: 1.0
-Element 4: float
-[.] float object info
-  value: 3.14
-Element 5: float
-[.] float object info
-  value: 3.14159
-Element 6: float
-[.] float object info
-  value: 3.14159265
-Element 7: float
-[.] float object info
-  value: 3.141592653589793
-[.] float object info
-  [ERROR] Invalid Float Object
-[*] Python list info
-  [ERROR] Invalid List Object
-julien@ubuntu:~/CPython$
 Repo:
 
 GitHub repository: alx-higher_level_programming
-Directory: 0x05-python-exceptions
-File: 103-python.c
-    
+Directory: 0x0B-python-input_output
+File: 101-stats.py
+  
 Copyright © 2024 ALX, All rights reserved.
 
 
