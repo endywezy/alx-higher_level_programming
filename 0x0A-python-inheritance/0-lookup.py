@@ -3,4 +3,4 @@
 
 def lookup(obj):
     """Returns a list of available"""
-    return [attr for attr in dir(obj) if not callable(getattr(obj, attr)) or not attr.startswith("__")]
+    return dir(obj)
