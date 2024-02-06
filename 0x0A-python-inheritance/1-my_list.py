@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-"""Define an inherited list class mylist"""
+"""Defines an inherited list class MyList."""
 
 
 class MyList(list):
-    """Implements sorted printing for the built-in list class"""
+    """Implements sorted printing for the built-in list class."""
 
     def print_sorted(self):
-        """Print a list in sorted ascending order"""
-        sorted_list = sorted(self)
-        print(sorted_list)
+        """Print a list in sorted ascending order."""
+        print(sorted(self))
