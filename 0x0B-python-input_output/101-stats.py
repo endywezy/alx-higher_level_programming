@@ -49,8 +49,8 @@ if __name__ == "__main__":
             except IndexError:
                 pass
 
-        print_stats(size, status_codes)
+            print_stats(size, status_codes)
 
-    except KeyboardInterrupt:
-        print_stats(size, status_codes)
-        raise
+            except KeyboardInterrupt:
+                print_stats(size, status_codes)
+                raise
