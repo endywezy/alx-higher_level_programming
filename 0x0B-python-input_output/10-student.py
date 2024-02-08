@@ -27,4 +27,3 @@ class Student:
             attrs (list): (Optional) The attributes to represent.
         """
         return {k: v for k, v in self.__dict__.items() if attrs is None or k in attrs}
-
