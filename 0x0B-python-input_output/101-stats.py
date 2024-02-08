@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# 101-stats.py
 """Reads from standard input and computes metrics.
 
 After every ten lines or the input of a keyboard interruption (CTRL + C),
@@ -16,9 +15,9 @@ def print_stats(size, status_codes):
         size (int): The accumulated read file size.
         status_codes (dict): The accumulated count of status codes.
     """
-    print("Total file size: {}".format(size))
-    for code in sorted(status_codes):
-        print("{}: {}".format(code, status_codes[code]))
+    print("File size: {}".format(size))
+    for key in sorted(status_codes):
+        print("{}: {}".format(key, status_codes[key]))
 
 if __name__ == "__main__":
     import sys
@@ -30,32 +29,27 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            line = line.strip()
-            if not line:
-                continue
+            if count == 10:
+                print_stats(size, status_codes)
+                count = 1
+            else:
+                count += 1
 
-            count += 1
-
-            parts = line.split()
-            if len(parts) < 10:
-                print("Invalid input format:", line, file=sys.stderr)
-                continue
+            line = line.split()
 
             try:
-                file_size = int(parts[-1])
-                status_code = parts[-2]
-            except ValueError:
-                print("Invalid file size:", parts[-1], file=sys.stderr)
-                continue
+                size += int(line[-1])
+            except (IndexError, ValueError):
+                pass
 
-            size += file_size
+            try:
+                if line[-2] in valid_codes:
+                    status_codes[line[-2]] = status_codes.get(line[-2], 0) + 1
+            except IndexError:
+                pass
 
-            if status_code in valid_codes:
-                status_codes[status_code] = status_codes.get(status_code, 0) + 1
-
-            if count % 10 == 0:
-                print_stats(size, status_codes)
+        print_stats(size, status_codes)
 
     except KeyboardInterrupt:
         print_stats(size, status_codes)
-        sys.exit(1)
+        raise
