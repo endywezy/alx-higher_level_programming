@@ -27,7 +27,8 @@ class Student:
         Args:
             attrs (list): (Optional) The attributes to represent.
         """
-        return {k: v for k, v in self.__dict__.items() if attrs is None or k in attrs}
+        return {k: v for k, v in self.__dict__.items()
+                if attrs is None or k in attrs}
 
     def reload_from_json(self, json):
         """Replace all attributes of the Student.
