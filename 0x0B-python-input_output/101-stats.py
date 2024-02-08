@@ -9,48 +9,38 @@ prints the following statistics:
 """
 
 
-def print_stats(size, status_codes):
-    """Print accumulated metrics.
+import sys
+from collections import defaultdict
 
-    Args:
-        size (int): The accumulated read file size.
-        status_codes (dict): The accumulated count of status codes.
-    """
-    print("File size: {}".format(size))
-    for key in sorted(status_codes):
-        print("{}: {}".format(key, status_codes[key]))
+# Function to print statistics
+def print_stats(total_size, status_counts):
+    print("Total file size:", total_size)
+    for code in sorted(status_counts.keys()):
+        print(f"{code}: {status_counts[code]}")
 
-if __name__ == "__main__":
-    import sys
+# Initialize variables
+total_size = 0
+status_counts = defaultdict(int)
+line_count = 0
 
-    size = 0
-    status_codes = {}
-    valid_codes = {'200', '301', '400', '401', '403', '404', '405', '500'}
-    count = 0
+try:
+    # Read input line by line from stdin
+    for line in sys.stdin:
+        line_count += 1
 
-    try:
-        for line in sys.stdin:
-            if count == 10:
-                print_stats(size, status_codes)
-                count = 1
-            else:
-                count += 1
+        # Split the input line into components
+        parts = line.split()
+        if len(parts) >= 10:
+            status_code = parts[-2]
+            file_size = int(parts[-1])
+            total_size += file_size
+            status_counts[status_code] += 1
 
-            line = line.split()
+        # Print statistics every 10 lines
+        if line_count % 10 == 0:
+            print_stats(total_size, status_counts)
 
-            try:
-                size += int(line[-1])
-            except (IndexError, ValueError):
-                pass
-
-            try:
-                if line[-2] in valid_codes:
-                    status_codes[line[-2]] = status_codes.get(line[-2], 0) + 1
-            except IndexError:
-                pass
-
-            print_stats(size, status_codes)
-
-            except KeyboardInterrupt:
-                print_stats(size, status_codes)
-                raise
+except KeyboardInterrupt:
+    # Print statistics on keyboard interruption
+    print_stats(total_size, status_counts)
+    sys.exit(0)  # Exit gracefully
