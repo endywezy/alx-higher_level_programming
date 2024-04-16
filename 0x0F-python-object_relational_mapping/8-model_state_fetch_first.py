@@ -1,37 +1,30 @@
 #!/usr/bin/python3
 """
-Prints the first State object from the database hbtn_0e_6_usa.
+A script that prints the first State object
+from the database hbtn_0e_6_usa
 """
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model_state import State, Base
+from model_state import Base, State
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database name>".format(sys.argv[0]))
-        sys.exit(1)
-
-    username, password, database = sys.argv[1:]
-
-    # Connect to MySQL server
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
-                          .format(username, password, database),
-                          pool_pre_ping=True)
-
-    # Create a session
+    engine = create_engine(
+        f"mysql+mysqldb://{sys.argv[1]}:{sys.argv[2]}\
+            @localhost:3306/{sys.argv[3]}")
     Session = sessionmaker(bind=engine)
+
     session = Session()
 
-    # Get the first state ordered by ID
-    state = session.query(State).order_by(State.id).first()
+    # states = session.query(State).order_by(State.id).all()
+    # for state in states:
+    #   if "a" in state.name:
+    #     print("f{state.id}: {state.name}")
+    #  NOTE: This approach is not effective enough as you don't need to query
+    # all objects
+    # from the database before extracting the first item
 
-    # Print the state information
-    if state is None:
-        print("Nothing")
-    else:
-        print("{}: {}".format(state.id, state.name))  # Corrected formatting
-
-    # Close the session
-    session.close()
-
+    first_state = session.query(State).order_by(State.id).first()
+    print(
+        "Nothing" if not first_state else "{}: {}".format(
+            first_state.id, first_state.name))
