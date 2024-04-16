@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """lists cities by states"""
 import sys
@@ -14,4 +13,3 @@ if __name__ == "__main__":
                        ON `c`.`state_id` = `s`.`id` \
                     ORDER BY `c`.`id`")
     [print(city) for city in cursor.fetchall()]
-
