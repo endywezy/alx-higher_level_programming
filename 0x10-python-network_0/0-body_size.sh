@@ -1,4 +1,3 @@
 #!/bin/bash
-# This script takes a URL as an argument
-
-curl -sI "$1" | grep -i Content-Length | awk '{print $2}' | tr -d '\r\n'
+# Script that shows the Content-Length from a HTTP request
+curl -sI "$1" | grep "Content-Length:" | cut -d " " -f 2
