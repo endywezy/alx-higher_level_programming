@@ -1,15 +1,17 @@
 #!/usr/bin/python3
-"""Fetches https://alx-intranet.hbtn.io/status."""
+"""
+    Module for getting the status of alx-intranet.hbtn.io/status.
+"""
 import urllib.request
-
 
 if __name__ == "__main__":
     try:
-        with urllib.request.urlopen("https://alx-intranet.hbtn.io/status") as response:
-            body = response.read()
-            print("Body response:")
-            print(f"\t- type: {type(body)}")
-            print(f"\t- content: {body}")
-            print(f"\t- utf8 content: {body.decode('utf-8')}")
-    except urllib.error.HTTPError as e:
-        print("Error: {}".format(e))
+        with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as resp:
+            if resp is not None:
+                html = resp.read()
+                print("Body response:")
+                print("\t- type: {}".format(type(html)))
+                print("\t- content: {}".format(html))
+                print("\t- utf8 content: {}".format(html.decode('utf-8')))
+    except Exception:
+        pass
