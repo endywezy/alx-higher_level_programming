@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ 
 A script that takes in a URL and sends a request to
-    the URL and displays the body of the response while
-    handling exceptions
+the URL and displays the body of the response while
+handling exceptions
 """
 import requests
 import sys
