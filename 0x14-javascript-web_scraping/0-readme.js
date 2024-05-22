@@ -1,14 +1,12 @@
 #!/usr/bin/node
 
-const request = require('request');
+const fs = require('fs');
+const filePath = process.argv[2];
 
-const url = 'https://jsonplaceholder.typicode.com/posts/1';
-
-request(url, (error, response, body) => {
-  if (error) {
-    console.error('Error:', error);
+fs.readFile(filePath, 'utf-8', (err, data) => {
+  if (err) {
+    console.error(err);
     return;
   }
-  console.log('Status Code:', response && response.statusCode);
-  console.log('Body:', body);
+  console.log(data);
 });
