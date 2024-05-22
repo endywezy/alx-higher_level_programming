@@ -1,49 +1,30 @@
 #!/usr/bin/node
 
 const request = require('request');
+
 const apiUrl = process.argv[2];
 
 request(apiUrl, (error, response, body) => {
-  if (error) {
-    console.error('Error:', error);
-    return;
-  }
+  if (!error && response.statusCode === 200) {
+    const tasks = JSON.parse(body);
 
-  const todos = JSON.parse(body);
-  const completedTasks = {};
+    // Create an object to store the count of completed tasks for each user id
+    const completedTasksByUser = {};
 
-  todos.forEach(todo => {
-    if (todo.completed) {
-      if (!completedTasks[todo.userId]) {
-        completedTasks[todo.userId] = 0;
+    // Loop through the tasks to count completed tasks by user id
+    tasks.forEach(task => {
+      if (task.completed) {
+        if (completedTasksByUser[task.userId]) {
+          completedTasksByUser[task.userId]++;
+        } else {
+          completedTasksByUser[task.userId] = 1;
+        }
       }
-      completedTasks[todo.userId]++;
-    }
-  });
+    });
 
-  console.log(completedTasks);
-})#!/usr/bin/node
-
-const request = require('request');
-const apiUrl = process.argv[2];
-
-request(apiUrl, (error, response, body) => {
-	  if (error) {
-		      console.error('Error:', error);
-		      return;
-		    }
-
-	  const todos = JSON.parse(body);
-	  const completedTasks = {};
-
-	  todos.forEach(todo => {
-		      if (todo.completed) {
-			            if (!completedTasks[todo.userId]) {
-					            completedTasks[todo.userId] = 0;
-					          }
-			            completedTasks[todo.userId]++;
-			          }
-		    });
-
-	  console.log(completedTasks);
-});;
+    // Print users with completed tasks
+    console.log(completedTasksByUser);
+  } else {
+    console.log('Error fetching data from the API');
+  }
+});
