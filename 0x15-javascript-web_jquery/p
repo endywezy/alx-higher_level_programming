@@ -4,5 +4,5 @@
  git config --global user.name "endywezy"
 
 # Add all files to git, commit changes, and push to the remote repository
-git add . && git commit -m 'Python MySQL Objects, Scopes and Closures' && git push
+git add . && git commit -m 'JavaScript - Web jQuery' && git push
 
